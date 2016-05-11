@@ -34,6 +34,7 @@ Configure the application:
 
 - apache-tomcat-9.0.0.M4\webapps\CrowdSourcing\WEB-INF\web.xml
     
+   ```xml 
     ...
       <context-param>
         <param-name>db-url</param-name>
@@ -48,6 +49,7 @@ Configure the application:
         <param-value>123</param-value>
       </context-param>
     ...
+    ```
 
 - apache-tomcat-9.0.0.M4\webapps\CrowdSourcing\META-INF\context.xml
 
