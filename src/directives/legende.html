@@ -1,0 +1,49 @@
+<div class="nav-aside-section">
+
+    <p class="nav-aside-title">Lagen</p>
+    <ul class="nav-aside-list" role="sidenav">
+    <li ng-repeat="lyr in layers track by $index" >
+     <a href="#" title="">
+        <div class="form-group">
+        <input id="{{lyr.name}}" type="checkbox" checked 
+                ng-model="layers[$index].visibile" ng-change="toggleLayer($index)" >
+        <label for="{{lyr.name}}" >{{lyr.name}}</label>
+        
+        <tink-accordion data-start-open="false" data-one-at-a-time="true" >
+          <span  ng-repeat="wmsLyr in lyr.wmslayers" >
+          <tink-accordion-panel data-is-collapsed="true" >
+            <data-header> {{wmsLyr}} </data-header>
+            <data-content>
+            <img ng-src="{{lyr.url}}?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER={{wmsLyr}}" 
+             width="200" />
+            </data-content>
+          </tink-accordion-panel>
+          </span>
+        </tink-accordion>
+
+        </div>
+     <a>
+    </li>   
+    <li>
+    <a href="#" title="">
+       <div class="form-group">
+         <label>Achtergrond</label>
+
+         <div class="radio">
+            <input type="radio" id="grbBackground" name="radio1" value="" checked 
+            onchange="mapView.setBackground('http://tile.informatievlaanderen.be/ws/raadpleegdiensten/tms/1.0.0/grb_bsk@GoogleMapsVL/{z}/{x}/{-y}.png')" />
+            <label for="grbBackground">GRB</label>
+         </div>
+         <div class="radio">
+            <input type="radio" id="lufoBackground" name="radio1" value=""
+            onchange="mapView.setBackground('http://tile.informatievlaanderen.be/ws/raadpleegdiensten/tms/1.0.0/omwrgbmrvl@GoogleMapsVL/{z}/{x}/{-y}.png')" />
+            <label for="lufoBackground">Luchtfoto</label>
+         </div>
+         
+       </div>
+    </a>
+    </li>
+    </ul>
+
+</div>
+      
