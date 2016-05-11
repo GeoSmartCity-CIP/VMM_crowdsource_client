@@ -2,6 +2,8 @@ Crowdsource app LNE
 ====
 A client application for the geosmartcity crowdwsource api (https://github.com/GeoSmartCity-CIP/crowd-sourcing).
 
+The [geosmartcity frontend library](https://github.com/GeoSmartCity-CIP/gsc-client), [openlayers3](http://openlayers.org/) and the [tink-toolkit](http://tink.digipolis.be/) are used to create this application. 
+
 prerequisites
 ----
 
@@ -32,7 +34,7 @@ Download the backend as war-file: https://github.com/GeoSmartCity-CIP/crowd-sour
 Load the crowd-sourcing backend into tomcat: http://localhost:8080/manager/html
 Configure the application:
 
-- apache-tomcat-9.0.0.M4\webapps\CrowdSourcing\WEB-INF\web.xml
+- edit: [apache-tomcat-home]\webapps\CrowdSourcing\WEB-INF\web.xml
     
    ```xml 
     ...
@@ -51,7 +53,31 @@ Configure the application:
     ...
     ```
 
-- apache-tomcat-9.0.0.M4\webapps\CrowdSourcing\META-INF\context.xml
+- edit or create: [apache-tomcat-home]\webapps\CrowdSourcing\META-INF\context.xml
 
+    ```xml 
     <?xml version="1.0" encoding="UTF-8"?>
     <Context allowCasualMultipartParsing="true" ></Context>
+    ```
+    
+Install this app
+----
+
+Install nodejs: https://nodejs.org , on windows use the node cmd-prompt for the next actions:
+
+Clone this repo, install bower and grunt and the dependencies defined in package.json and bower. 
+
+    git clone https://github.com/warrieka/VMM_crowdsource_client
+    npm install bower -g
+    npm install grunt -g
+    npm install 
+    bower install 
+    
+Then build the application using grunt:
+
+    grunt build
+    
+The folder */build* will be created and contain a .war-file to deploy to the tomcat webserver.
+The folder */public* will contain the application in unpackaged form. 
+
+
