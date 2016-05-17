@@ -1,7 +1,6 @@
-<div class="nav-aside-section">
-
-    <p class="nav-aside-title">Lagen</p>
-    <ul class="nav-aside-list" role="sidenav">
+<!--legend template-->
+  
+  <ul class="nav-aside-list" role="sidenav">
     <li ng-repeat="lyr in layers track by $index" >
      <a href="#" title="">
         <div class="form-group">
@@ -12,20 +11,21 @@
         <tink-accordion data-start-open="false" data-one-at-a-time="true" >
           <span  ng-repeat="wmsLyr in lyr.wmslayers" >
           <tink-accordion-panel data-is-collapsed="true" >
-            <data-header> {{wmsLyr}} </data-header>
+            <data-header> {{wmsLyr.name}} </data-header>
             <data-content>
-            <img ng-src="{{lyr.url}}?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER={{wmsLyr}}" 
-             width="200" />
+            <img ng-src="{{lyr.url}}?service=WMS&REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER={{wmsLyr.id}}" 
+              style="max-width: 170px;" />
             </data-content>
           </tink-accordion-panel>
           </span>
         </tink-accordion>
 
         </div>
-     <a>
+     </a>
     </li>   
+    
     <li>
-    <a href="#" title="">
+     <a href="#" title="">
        <div class="form-group">
          <label>Achtergrond</label>
 
@@ -41,9 +41,7 @@
          </div>
          
        </div>
-    </a>
+     </a>
     </li>
-    </ul>
-
-</div>
-      
+    
+  </ul>

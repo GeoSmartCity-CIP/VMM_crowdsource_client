@@ -1,4 +1,4 @@
-
+/*globals app */
 app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$sce', 'modalTitle', 'items', 
 function($scope, $modalInstance, $sce, modalTitle, items) {
 

@@ -1,5 +1,5 @@
-/* the sidebar containing the legend of the map
-*/
+/* the sidebar containing the legend of the map*/
+/*globals app, $*/
 var sideNavLeft = $("#sideNavLeft")
 var sideNav = window.tinkApi.sideNavigation( sideNavLeft );
 

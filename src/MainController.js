@@ -1,25 +1,39 @@
+/*global app, mapView, angular, $ */
 
-    
 app.controller('MainController', ['$scope', '$modal', function($scope, $modal) {
+  
   $scope.mainTitle = "Crowdsource app";
   
+  //tools
+  $scope.tools = [{id: "cs-event", name: "Nieuwe Melding", show: true}];
+  $scope.activeTool = app.activeTool = "cs-event";
+  $scope.toolchange = function () {
+      app.activeTool = $scope.activeTool;
+  };
+  
+  //layers
   $scope.layers = [{name: "Rioolnetwerk" , type: "wms", visibile: true, 
     url: "http://geoservices.informatievlaanderen.be/raadpleegdiensten/VMM/wms",
-    wmslayers: ["HYDPNT","STRENG","KOPPNT"]
+    wmslayers: [{name:"Hydropunt",  id:"HYDPNT"}, //name is for display, id is layerid in wms
+                {name:"Streng",     id:"STRENG"}, 
+                {name:"Koppelpunt", id:"KOPPNT"}]
+  } , {name: "mercatorNet", type:"wms", visibile: false, 
+    url: "//www.mercator.vlaanderen.be/raadpleegdienstenmercatorpubliek/ows", 
+    wmslayers: [{name: "Habitat gebied", id:"ps:ps_hbtrl"}]
   }];
-  
-  $scope.toggleLayer = function(idx){
-      var lyr = $scope.layers[idx];
-      mapView.setLayerVisible(idx , lyr.visibile );
-  }
-  
-  angular.forEach( $scope.layers , function(val, key){
-      mapView.addWMSlayer(key, val.url, val.wmslayers, val.name, val.visibile);
-        
+  $scope.toggleLayer = function(id){
+      var lyr = $scope.layers[id];
+      mapView.setLayerVisible(id , lyr.visibile );
+  };
+  angular.forEach( $scope.layers , function(val, idx){
+      var wmsLyrs = val.wmslayers.map(function(i){ return i.id; });
+      mapView.addWMSlayer(idx, val.url, wmsLyrs, val.name, val.visibile);
+      $scope.tools.push({id: idx, name: "Identificeer: " + val.name })
   });
-
+  
+  //modal
   app.openModal = function(title, content) {
-      var modalInstance = $modal.open({
+      $modal.open({
         templateUrl: 'directives/modal.html',
         controller: 'ModalInstanceCtrl',
         resolve: {

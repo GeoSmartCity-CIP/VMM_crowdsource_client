@@ -20,7 +20,7 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: 'src',
                 src: '**.html',
-                dest: 'public/',
+                dest: 'public/'
                } ]
            }
         },
@@ -31,21 +31,21 @@ module.exports = function(grunt) {
             sourceMap: true
           },
           js: {
-            src: [ 'node_modules/gsc/dist/gsc.js', 'src/app.js', 'src/map/*.js', 
-                   'src/MainController.js','src/directives/*.js'],
-            dest: 'public/app.js',
+            src: ['node_modules/openlayers/dist/ol.js' ,'node_modules/gsc/dist/gsc.js', 
+                  'src/app.js', 'src/map/*.js', 'src/MainController.js', 'src/directives/*.js'],
+            dest: 'public/js/app.js',
           },
           css: {
-            src: ['node_modules/gsc/dist/gsc.css','node_modules/gsc/dist/styles.css'],
-            dest: 'public/app.css',
+            src: [ 'node_modules/openlayers/dist/ol.css' ],
+            dest: 'public/css/app.css',
           },
       },
     
     bower_concat: {
           all: {
             dest: {
-              'js': 'public/bower.js',
-              'css': 'public/bower.css'
+              'js': 'public/js/bower.js',
+              'css': 'public/css/bower.css'
             },
             exclude: [ 'jquery' ],
             dependencies: {
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
           options: {
             war_verbose: true,
             war_dist_folder: 'build',
-            war_name: 'GSC_CS_Client',
+            war_name: '<%= pkg.name %>',
             webxml_welcome: 'index.html',
             webxml_display_name: '<%= pkg.name %>',
           },

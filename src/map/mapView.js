@@ -1,33 +1,35 @@
+/*globals $, ol, app */
 
-var mapView = {}
-mapView.layers = {}
+var mapView = {};
+mapView.layers = {};
 
-//TODO: also add http://openlayers.org/en/v3.6.0/examples/vector-wfs.html ?
+//TODO?: also add WFS, http://openlayers.org/en/v3.6.0/examples/vector-wfs.html 
 mapView.addWMSlayer = function(id, layerUrl, layers, name, visible ){
-    var layerUrl = layerUrl.split("?")[0]
+    var url = layerUrl.split("?")[0];
     var wmsSource =  new ol.source.ImageWMS({
-            url: layerUrl,
+            url: url,
             title: name,
             params: {'LAYERS':  layers.join(',')}
         });
     var wmsLyr = new ol.layer.Image({
-            source: wmsSource
+            source: wmsSource,
+            visible: visible
         });
     mapView.map.addLayer( wmsLyr );
     mapView.layers[id] = wmsLyr;
     
     /*POPUP*/
     mapView.map.on('singleclick', function(evt) {
-        if ( ! wmsLyr.getVisible() ){ return; }
-        
-        var viewResolution = mapView.map.getView().getResolution() ;
-        var viewProjection = mapView.map.getView().getProjection();
-        var url = wmsSource.getGetFeatureInfoUrl(
-            evt.coordinate, viewResolution, viewProjection, {'INFO_FORMAT': 'text/html'});
-        app.openModal( name , '<iframe src="' + url + '"></iframe>' );
+        if ( app.activeTool == id ){
+            var viewResolution = mapView.map.getView().getResolution() ;
+            var viewProjection = mapView.map.getView().getProjection();
+            var url = wmsSource.getGetFeatureInfoUrl(
+                evt.coordinate, viewResolution, viewProjection, {'INFO_FORMAT': 'text/html'});
+            app.openModal( name , '<iframe src="' + url + '"></iframe>' );
+        }
     });
     return wmsLyr;
-}
+};
 
 mapView.clearAllLayers = function(){
     for (var lyrId in mapView.layers) {
@@ -35,15 +37,15 @@ mapView.clearAllLayers = function(){
         mapView.map.removeLayer(lyr);
         delete mapView[lyrId];
     }
-}
+};
 mapView.setLayerVisible = function(layerId, visibility){
     var lyr = mapView.layers[layerId];
     lyr.setVisible( visibility );
-}
+};
 mapView.setBackground = function( urlTemplate ){
     mapView.background.getSource().setUrls([ urlTemplate ]);
     return mapView.background;
-} 
+};
 mapView.createMap = function( mapId ){
     if( typeof( mapView.map) !== "undefined" ) { return; }
     
@@ -61,8 +63,8 @@ mapView.createMap = function( mapId ){
             }), 
         controls: ol.control.defaults().extend([ new ol.control.ScaleLine() ])
     });
-    return mapView.map
-}
+    return mapView.map;
+};
 mapView.createMap('map'); 
 
 

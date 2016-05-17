@@ -1,5 +1,5 @@
 {
-  "name": "GeoSmartCity_crowdsource_client",
+  "name": "lne_crowdsource_client",
   "description": "A client application for the geosmartcity crowdwsource api",
   "main": "build/index.html",
   "authors": [

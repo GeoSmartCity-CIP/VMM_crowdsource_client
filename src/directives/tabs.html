@@ -1,0 +1,19 @@
+<div ng-controller="tabController">
+    
+    <div class="btn-group" style="margin-left: 10px" >
+          <button type="button" class="btn" 
+          ng-class="{'btn-primary ': isActive('Legende')}" ng-click="setActive('Legende')">Legende</button>
+          <button type="button" class="btn" 
+          ng-class="{'btn-primary ': isActive('Meldingen')}" ng-click="setActive('Meldingen')">Meldingen</button>
+    </div>
+
+    
+    <div ng-show="isActive('Legende')" >
+        <legende ></legende>
+    </div>
+
+    <div ng-show="isActive('Meldingen')" >
+        <events ></events>
+    </div>
+    
+</div>

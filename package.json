@@ -4,8 +4,14 @@
   "author": "Kay Warrie",
   "description": "A client application for the geosmartcity crowdwsource api",
   "homepage": "https://github.com/warrieka/VMM_crowdsource_client",
-  "repository": {"type": "git", "url": "https://github.com/warrieka/VMM_crowdsource_client"},
-  "bugs": {"url" : "https://github.com/warrieka/VMM_crowdsource_client" , "email": "kay@kgis.be"},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/warrieka/VMM_crowdsource_client"
+  },
+  "bugs": {
+    "url": "https://github.com/warrieka/VMM_crowdsource_client",
+    "email": "kay@kgis.be"
+  },
   "license": "EUPL-1.1",
   "licenses": [
     {
@@ -29,6 +35,7 @@
     "start": "http-server"
   },
   "dependencies": {
-    "gsc": "^0.1.7"
+    "gsc": "^0.1.7",
+    "openlayers": "^3.15.1"
   }
 }
