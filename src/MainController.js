@@ -3,9 +3,11 @@
 app.controller('MainController', ['$scope', '$modal', function($scope, $modal) {
   
   $scope.mainTitle = "Crowdsource app";
-  
+  //initialize mapview
+  mapView.init();
+
   //tools
-  $scope.tools = [{id: "cs-event", name: "Nieuwe Melding", show: true}];
+  $scope.tools = [{id: "cs-event", name: "Melding", show: true}];
   $scope.activeTool = app.activeTool = "cs-event";
   $scope.toolchange = function () {
       app.activeTool = $scope.activeTool;

@@ -1,5 +1,5 @@
 <!--legend template-->
-  
+
   <ul class="nav-aside-list" role="sidenav">
     <li ng-repeat="lyr in layers track by $index" >
      <a href="#" title="">
@@ -14,7 +14,7 @@
             <data-header> {{wmsLyr.name}} </data-header>
             <data-content>
             <img ng-src="{{lyr.url}}?service=WMS&REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER={{wmsLyr.id}}" 
-              style="max-width: 170px;" />
+              class="img-responsive"  alt="{{wmsLyr.id}}" />
             </data-content>
           </tink-accordion-panel>
           </span>

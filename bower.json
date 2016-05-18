@@ -26,6 +26,7 @@
     "tink-core": "^1.12.4",
     "tink-navigation-angular": "^2.0.1",
     "tink-modal-angular": "^2.0.0",
-    "tink-accordion-angular": "^2.0.0"
+    "tink-accordion-angular": "^2.0.0",
+    "tink-pagination-angular": "^2.0.0"
   }
 }

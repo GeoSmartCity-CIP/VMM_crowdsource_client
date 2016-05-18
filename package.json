@@ -35,7 +35,6 @@
     "start": "http-server"
   },
   "dependencies": {
-    "gsc": "^0.1.7",
-    "openlayers": "^3.15.1"
+    "gsc": "^0.1.7"
   }
 }

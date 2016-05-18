@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html  class="has-nav-left">
   <head>
     <title>Crowdsource Client</title>
@@ -7,15 +8,15 @@
 
     <link rel="stylesheet" href="css/bower.css" />
     <link rel="stylesheet" href="css/app.css" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ol3/3.15.1/ol.css" /> 
     <style type="text/css">
       .main {
         height: -moz-calc(100% - 60px);
         height: calc(100% - 60px);
       }
-      
       #map { height: 100% }
     </style>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ol3/3.15.1/ol.js" ></script>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="js/bower.js"></script>
   
@@ -26,7 +27,7 @@
   <nav data-tink-top-nav="" class="nav-top">
     <ul class="nav-top-branding">
         <li>
-          <a href="#" title=""><img src="images/flgov.png"></a>
+          <a href="#" title=""><img src="images/flgov.png" ></a>
         </li>
         <li class="nav-top-toggle" data-tink-sidenav-collapse="sideNavLeft" onclick="sideNav.toggleMenu()" >
           <a href="" title="Open menu" ><i class="fa fa-bars"><span class="sr-only">Open menu</span></i></a>
@@ -36,11 +37,13 @@
         </li>
     </ul>
     <ul class="nav-top-center">
-       <div class="select" >
-         <select ng-model="activeTool" ng-change="toolchange()" >
-            <option ng-repeat="tool in tools"  value="{{tool.id}}">{{tool.name}}</option>
-         </select>
-       </div>
+       <li>
+           <div class="select" >
+             <select ng-model="activeTool" ng-change="toolchange()" >
+                <option ng-repeat="tool in tools"  value="{{tool.id}}">{{tool.name}}</option>
+             </select>
+           </div>
+       </li>
     </ul>
   </nav>
   <!--/Navbar on top-->

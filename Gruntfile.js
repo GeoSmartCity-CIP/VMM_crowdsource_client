@@ -31,12 +31,12 @@ module.exports = function(grunt) {
             sourceMap: true
           },
           js: {
-            src: ['node_modules/openlayers/dist/ol.js' ,'node_modules/gsc/dist/gsc.js', 
+            src: ['node_modules/gsc/dist/gsc.js',  //'node_modules/openlayers/dist/ol.js',
                   'src/app.js', 'src/map/*.js', 'src/MainController.js', 'src/directives/*.js'],
             dest: 'public/js/app.js',
           },
           css: {
-            src: [ 'node_modules/openlayers/dist/ol.css' ],
+            src: [  ], //'node_modules/openlayers/dist/ol.css'
             dest: 'public/css/app.css',
           },
       },
