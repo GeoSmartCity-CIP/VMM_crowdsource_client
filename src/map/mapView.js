@@ -1,4 +1,5 @@
-/*globals $, ol, app */
+/*globals $, ol, app, mapView */
+
 mapView.layers = {};
 
 mapView.init = function(){

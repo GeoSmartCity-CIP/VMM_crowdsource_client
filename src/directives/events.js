@@ -1,10 +1,12 @@
-/*globals app, gsc */
+/*globals app, gsc, mapView */
 
 app.controller('eventController', ['$scope', function($scope) {
 
     $scope.events = [];
     $scope.pageSize = 5;
     $scope.page = 0;
+    
+    $scope.gscWarning = false;
 
     $scope.numberOfPages=function(){
         return Math.ceil($scope.events.length/$scope.pageSize);
@@ -22,6 +24,9 @@ app.controller('eventController', ['$scope', function($scope) {
     gsc.cs.eventListFilter({}).done(function(events) {
          $scope.events = events;
          mapView.addEventData(events);
+         $scope.gscWarning = false;
+    }).fail(function (err) {
+         $scope.gscWarning = err.statusText ;
     });
 
 }]);

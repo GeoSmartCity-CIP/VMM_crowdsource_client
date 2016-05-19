@@ -1,4 +1,5 @@
 /*globals angular, gsc */
+
 gsc.cs.csUrl("http://localhost:8080/CrowdSourcing" );
 
 //namespaces:

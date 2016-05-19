@@ -1,51 +1,61 @@
-/*global app, mapView, angular, $ */
+/*global app, mapView, angular, gsc */
 
-app.controller('MainController', ['$scope', '$modal', function($scope, $modal) {
+app.controller('MainController', ['$scope', '$http', '$modal', 
+function($scope, $http, $modal) {
   
-  $scope.mainTitle = "Crowdsource app";
+  $scope.mainTitle = "";
+  $scope.layers = [];
   //initialize mapview
   mapView.init();
 
   //tools
-  $scope.tools = [{id: "cs-event", name: "Melding", show: true}];
-  $scope.activeTool = app.activeTool = "cs-event";
+  $scope.tools = [{id: "none", name: "Geen active tool", show: true}];
+  $scope.activeTool = app.activeTool = "none";
   $scope.toolchange = function () {
       app.activeTool = $scope.activeTool;
   };
   
-  //layers
-  $scope.layers = [{name: "Rioolnetwerk" , type: "wms", visibile: true, 
-    url: "http://geoservices.informatievlaanderen.be/raadpleegdiensten/VMM/wms",
-    wmslayers: [{name:"Hydropunt",  id:"HYDPNT"}, //name is for display, id is layerid in wms
-                {name:"Streng",     id:"STRENG"}, 
-                {name:"Koppelpunt", id:"KOPPNT"}]
-  } , {name: "mercatorNet", type:"wms", visibile: false, 
-    url: "//www.mercator.vlaanderen.be/raadpleegdienstenmercatorpubliek/ows", 
-    wmslayers: [{name: "Habitat gebied", id:"ps:ps_hbtrl"}]
-  }];
   $scope.toggleLayer = function(id){
       var lyr = $scope.layers[id];
       mapView.setLayerVisible(id , lyr.visibile );
   };
-  angular.forEach( $scope.layers , function(val, idx){
-      var wmsLyrs = val.wmslayers.map(function(i){ return i.id; });
-      mapView.addWMSlayer(idx, val.url, wmsLyrs, val.name, val.visibile);
-      $scope.tools.push({id: idx, name: "Identificeer: " + val.name })
-  });
+
+  //load config 
+  $http.get('config.json').then(
+      function( response ){
+        app.config = response.data;
+        $scope.mainTitle = app.config.title;
+        $scope.layers = app.config.layers;
+        
+        gsc.cs.csUrl( app.config.csurl );
+         
+        angular.forEach( $scope.layers , function(val, idx){
+            var wmsLyrs = val.wmslayers.map(function(i){ return i.id; });
+            mapView.addWMSlayer(idx, val.url, wmsLyrs, val.name, val.visibile);
+            $scope.tools.push({id: idx, name: "Identificeer: " + val.name });
+         });
+      }, 
+      function (err) {
+         throw  err;
+    });
   
   //modal
-  app.openModal = function(title, content) {
+  app.openModal = function(title, content, showOK) {
       $modal.open({
         templateUrl: 'directives/modal.html',
         controller: 'ModalInstanceCtrl',
         resolve: {
-          backdrop: false,
+          backdrop: true,
           keyboard: true, 
           modalTitle : function() {
             return  title;
           },
-          items: function() {
+          modalContent: function() {
             return  content;
+          },
+          OK: function() {
+            if (showOK) return true;
+            else return false;
           }
         }
       });

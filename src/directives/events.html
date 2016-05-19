@@ -2,6 +2,11 @@
  <ul class="nav-aside-list" role="sidenav" ng-controller="eventController" >
 
      <li >
+      <div class="callout-danger margin-left margin-right" ng-show="gscWarning" >
+          <p><strong>Error:</strong> 
+          Kan niet verbinden met Crowdsource server, de api meld: <em>{{gscWarning}}<em> </p>
+      </div>
+      
         <tink-accordion data-start-open="false" data-one-at-a-time="true">
           <span ng-repeat="event in events | limitTo:pageSize:page*pageSize">
           <tink-accordion-panel data-is-collapsed="true" >

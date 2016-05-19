@@ -1,0 +1,15 @@
+{
+    "title": "De Rioolnetwerk crowsource app",
+    "csurl": "http://localhost:8080/CrowdSourcing",
+    "layers": [{
+        "name": "Rioolnetwerk" , "type": "wms", "visibile": true, 
+        "url": "//geoservices.informatievlaanderen.be/raadpleegdiensten/VMM/wms",
+        "wmslayers": [{"name":"Hydropunt",  "id":"HYDPNT"}, 
+                      {"name":"Streng",     "id":"STRENG"}, 
+                      {"name":"Koppelpunt", "id":"KOPPNT"}]
+      } , {
+        "name": "mercatorNet", "type":"wms", "visibile": false, 
+        "url": "//www.mercator.vlaanderen.be/raadpleegdienstenmercatorpubliek/ows", 
+        "wmslayers": [{"name": "Habitat gebied", "id":"ps:ps_hbtrl"}]
+      }]
+}
