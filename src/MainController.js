@@ -40,8 +40,8 @@ function($scope, $http, $modal) {
     });
   
   //modal
-  app.openModal = function(title, content, showOK) {
-      $modal.open({
+  app.openModal = function(title, content, showOK, showCancel) {
+      return $modal.open({
         templateUrl: 'directives/modal.html',
         controller: 'ModalInstanceCtrl',
         resolve: {
@@ -55,6 +55,10 @@ function($scope, $http, $modal) {
           },
           OK: function() {
             if (showOK) return true;
+            else return false;
+          },
+          Cancel: function() {
+            if (showCancel) return true;
             else return false;
           }
         }

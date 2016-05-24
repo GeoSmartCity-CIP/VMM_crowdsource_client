@@ -1,4 +1,4 @@
-/*globals $, ol, app, mapView */
+/*globals ol, app, mapView, navigator, $ */
 
 mapView.layers = {};
 
@@ -7,7 +7,7 @@ mapView.init = function(){
     mapView.drawLayer = new ol.layer.Vector({map: map,
                                              source: new ol.source.Vector() });
     map.addLayer( mapView.eventLayer );
-}
+};
 
 mapView.addWMSlayer = function(id, layerUrl, layers, name, visible ){
     var url = layerUrl.split("?")[0];
@@ -30,7 +30,7 @@ mapView.addWMSlayer = function(id, layerUrl, layers, name, visible ){
             var viewProjection = mapView.map.getView().getProjection();
             var url = wmsSource.getGetFeatureInfoUrl(
                 evt.coordinate, viewResolution, viewProjection, {'INFO_FORMAT': 'text/html'});
-            app.openModal( name , '<iframe src="' + url + '"></iframe>' );
+            app.openModal( name , '<iframe src="' + url + '" ></iframe>', false, true );
         }
     });
     return wmsLyr;
@@ -53,7 +53,7 @@ mapView.setBackground = function( urlTemplate ){
 };
 mapView.createMap = function( mapId ){
     if( typeof( mapView.map) !== "undefined" ) { return; }
-    
+
     mapView.background = new ol.layer.Tile({
         source: new ol.source.XYZ({
                url: "http://tile.informatievlaanderen.be/ws/raadpleegdiensten/tms/1.0.0/grb_bsk@GoogleMapsVL/{z}/{x}/{-y}.png"
@@ -67,7 +67,9 @@ mapView.createMap = function( mapId ){
               center: ol.proj.fromLonLat([4, 51]),
               zoom: 9
             }), 
-        controls: ol.control.defaults().extend([ new ol.control.ScaleLine() ])
+        controls: ol.control.defaults().extend([ 
+            new ol.control.ScaleLine() , new mapView.zoomToGeolocation()
+        ])
     });
     return mapView.map;
 };
@@ -95,20 +97,29 @@ mapView.zoomTo = function(x, y, zoom){
     //show center for a short period
     feat.setGeometry(new ol.geom.Point(center));
     mapView.drawLayer.getSource().addFeature(feat);
-    window.setInterval( function () {
+    window.setTimeout( function () {
            mapView.drawLayer.getSource().removeFeature(feat);
         } , 5000);
 
-}
+};
 
 mapView.getMyPosition = function(callback){
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(myPosition){
-           var y = myPosition.coords.latitude;
-           var x = myPosition.coords.longitude;
-           console.log( x +", "+ y )
+    if (navigator.geolocation && typeof(callback) === "function" ) {
+        navigator.geolocation.getCurrentPosition(function(pos){
+           var y = pos.coords.latitude;
+           var x = pos.coords.longitude;
            callback( x,y );
         });
     }
+};
 
+//get a single xy from mapclick
+mapView.positionFromMap = function(callback){
+    $("#map").css('cursor', 'crosshair');
+    //return the event so it can be canceled
+    return mapView.map.once('click', function(evt) {
+        var xy = ol.proj.transform(  evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+        $("#map").css('cursor', 'auto');
+        callback(xy[0], xy[1]);
+    });
 }

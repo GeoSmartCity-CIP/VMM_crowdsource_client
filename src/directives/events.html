@@ -2,13 +2,14 @@
  <ul class="nav-aside-list" role="sidenav" ng-controller="eventController" >
 
      <li >
+
       <div class="callout-danger margin-left margin-right" ng-show="gscWarning" >
-          <p><strong>Error:</strong> 
+         <p><strong>Error:</strong> 
           Kan niet verbinden met Crowdsource server, de api meld: <em>{{gscWarning}}<em> </p>
       </div>
       
-        <tink-accordion data-start-open="false" data-one-at-a-time="true">
-          <span ng-repeat="event in events | limitTo:pageSize:page*pageSize">
+      <tink-accordion data-start-open="false" data-one-at-a-time="true" ng-hide="gscWarning" >
+        <span ng-repeat="event in events | limitTo:pageSize:page*pageSize">
           <tink-accordion-panel data-is-collapsed="true" >
             <data-header> {{event.description | limitTo:16 }}{{ event.description.length > 16 ? ' ...':''}} </data-header>
             <data-content>
@@ -24,20 +25,22 @@
 
             </data-content>
           </tink-accordion-panel>
-          </span>
-        </tink-accordion>
+         </span>
+       </tink-accordion>
      </li>
 
-     <li>
-        <hr/><!--paging if mote then 10 records-->
+     <li >
+        <hr/><!--paging if more then 5 records-->
         <div class="margin-left" ng-show="numberOfPages() > 1"  >
             <button type="button" ng-disabled="page == 0" ng-click="page=page-1">
                 Vorige
             </button>
-            <button type="button" ng-disabled="page >= events.length/pageSize - 1" ng-click="page=page + 1">
+            <button type="button" ng-disabled="page >= events.length/pageSize - 1" 
+                    ng-click="page=page + 1">
                 Volgende
             </button>
             {{page+1}}/{{numberOfPages()}}
         </div>
+      
      <li>
  </ul>

@@ -4,6 +4,8 @@
     <div ng-bind-html="content"></div>
   </div>
   <hr/>
-  <button data-ng-click="ok()" ng-show="showOK" >ok</button>
-  <button data-ng-click="cancel()">Close</button>
+  <button data-ng-click="ok()" class="fa fa-check" ng-show="showOK" >
+      <span class="fa fa-check" ></span> Ok</button>
+  <button data-ng-click="cancel()" ng-show="showcancel">
+      <span class="fa fa-times-circle" ></span> Close</button>
 </div>

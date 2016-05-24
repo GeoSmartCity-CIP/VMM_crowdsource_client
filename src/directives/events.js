@@ -18,7 +18,7 @@ app.controller('eventController', ['$scope', function($scope) {
 
     $scope.maximizeImage= function(name, url){
         var content = '<img src="'+url+'" alt="'+name+'" class="img-responsive">';
-        app.openModal( name, content );
+        app.openModal( name, content, false, true );
     }
 
     gsc.cs.eventListFilter({}).done(function(events) {
