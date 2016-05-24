@@ -11,10 +11,6 @@ app.controller('tabController', ['$scope', '$modal', function($scope, $modal) {
       var evt = {};
       $scope.creatingEvent = false;
 
-      $scope.createEvent = function() {
-           $scope.creatingEvent = true;
-        };
-
       $scope.forMyPosition = function() {
            if( typeof(evt.listener) !== "undefined" ) {
                 $("#map").css('cursor', 'auto');
@@ -36,28 +32,30 @@ app.controller('tabController', ['$scope', '$modal', function($scope, $modal) {
         };
       
       var eventForm = function(x,y) {
-
-      var form = $modal.open({
+            //create a modal form
+           $modal.open({
                 templateUrl: 'directives/createEvent.html',
                 controller: 'createEventCtrl',
                 resolve: {
                   backdrop: false,
                   keyboard: false, 
                   xy: function() {
-                      return  [x,y];
-                  }
-                }
-              });
-        
-      form.result.then(
-           function(obj) {
-              $scope.creatingEvent = false;
-        });
+                      return  [x,y]; }
+                 }
+              }).result.then(     //when fotm closed
+                 function() {
+                   $scope.creatingEvent = false;
+             });
       };
-      
+
+      app.newEvent = function(){
+          $scope.activetab = 'Meldingen';
+          $scope.creatingEvent  = true;
+          app.sideNav.openMenu();
+      }
 }]);
 
-app.directive('tabs', function() { 
+app.directive('tabs', function() {
   return { 
     restrict: 'E', 
     templateUrl: 'directives/tabs.html' 

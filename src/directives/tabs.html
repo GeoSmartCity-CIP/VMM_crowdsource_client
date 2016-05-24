@@ -14,22 +14,24 @@
 
     <div ng-show="isActive('Meldingen')" >
         <div ng-hide="creatingEvent" >
-            <events ></events>    
-            <button type="button" class="btn-info margin-left margin-right" 
-                    ng-click="createEvent()" >Nieuwe melding</button>
+
+            <events ></events>
+            <a href="" class="margin-left margin-top"
+                    ng-click="creatingEvent = true" >Nieuwe melding</a>
+
         </div>
         
-        <div ng-show="creatingEvent" class="margin-left" >
-            <p>Bepaald de  aan de hand van: </p>
-            <button type="button" ng-click="forMyPosition()" class="margin-right">
-                <span class="fa fa-crosshairs" ></span> GPS-locatie</button>
-            <button type="button" ng-click="positionFromMap()" class="margin-right" >
-                <span class="fa fa-map-marker" ></span> Prik op kaart</button>
+        <div ng-show="creatingEvent" class="margin-left margin-top" >
+            <h4>Nieuwe Melding</h4>
+            <p>Bepaal de locatie aan de hand van: </p>
+            <p> <button type="button" ng-click="forMyPosition()" class="margin-right">
+                <span class="fa fa-crosshairs" ></span> De GPS-locatie</button> </p>
+            <p> <button type="button" ng-click="positionFromMap()" class="margin-right" >
+                <span class="fa fa-map-marker" ></span> Prikken op kaart</button> </p>
             <hr/>
-            <button type="button"  ng-click="cancel()" class="margin-right" >
-                <span class="fa fa-times-circle" ></span> Cancel</button>
+            <p>  <button type="button"  ng-click="cancel()" class="margin-right" >
+                <span class="fa fa-times-circle" ></span> Cancel</button> </p>
         </div>
     </div>
-
     
 </div>

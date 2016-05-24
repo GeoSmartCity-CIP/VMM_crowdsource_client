@@ -9,7 +9,7 @@
                       {"name":"Koppelpunt", "id":"KOPPNT"}]
       } , {
         "name": "mercatorNet", "type":"wms", "visibile": false, 
-        "url": "//www.mercator.vlaanderen.be/raadpleegdienstenmercatorpubliek/ows", 
+        "url": "//www.mercator.vlaanderen.be/raadpleegdienstenmercatorpubliek/ows",
         "wmslayers": [{"name": "Habitat gebied", "id":"ps:ps_hbtrl"}]
       }]
 }

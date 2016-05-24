@@ -1,9 +1,8 @@
 /* the sidebar containing the legend of the map*/
 /*globals app, $*/
-var sideNavLeft = $("#sideNavLeft")
-var sideNav = window.tinkApi.sideNavigation( sideNavLeft );
+app.sideNav = window.tinkApi.sideNavigation( $("#sideNavLeft") );
 
-sideNav.init({
+app.sideNav.init({
   accordion: true,
   gotoPage: false
 });

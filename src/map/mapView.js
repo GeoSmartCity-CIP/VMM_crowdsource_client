@@ -14,7 +14,7 @@ mapView.addWMSlayer = function(id, layerUrl, layers, name, visible ){
     var wmsSource =  new ol.source.ImageWMS({
             url: url,
             title: name,
-            params: {'LAYERS':  layers.join(',')}
+            params: {'LAYERS':  layers.join(',') }
         });
     var wmsLyr = new ol.layer.Image({
             source: wmsSource,

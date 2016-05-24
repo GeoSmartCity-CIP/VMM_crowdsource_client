@@ -21,14 +21,18 @@ app.controller('eventController', ['$scope', function($scope) {
         app.openModal( name, content, false, true );
     }
 
-    gsc.cs.eventListFilter({}).done(function(events) {
-         $scope.events = events;
-         mapView.addEventData(events);
-         $scope.gscWarning = false;
-    }).fail(function (err) {
-         $scope.gscWarning = err.statusText ;
-    });
-
+    app.updateEventData = function () {
+         gsc.cs.eventListFilter({}).done(function(events) {
+             $scope.$apply(function(){
+                 $scope.events = events;
+                 mapView.replaceEventData(events);
+                 $scope.gscWarning = false;
+             });
+        }).fail(function (err) {
+             $scope.gscWarning = err.statusText ;
+        });
+    }
+    app.updateEventData();
 }]);
 
 app.directive('events', function() { 

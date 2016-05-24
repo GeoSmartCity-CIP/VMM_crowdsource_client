@@ -9,10 +9,17 @@ function($scope, $http, $modal) {
   mapView.init();
 
   //tools
-  $scope.tools = [{id: "none", name: "Geen active tool", show: true}];
+  $scope.tools = [{id: "none", name: "Geen active tool", show: true},
+                  {id: "event", name: "Nieuwe melding", show: true }];
   $scope.activeTool = app.activeTool = "none";
   $scope.toolchange = function () {
-      app.activeTool = $scope.activeTool;
+      if( $scope.activeTool === "event" ){
+        $scope.activeTool = app.activeTool = "none";
+        app.newEvent();
+      }
+      else {
+        app.activeTool = $scope.activeTool;
+      }
   };
   
   $scope.toggleLayer = function(id){

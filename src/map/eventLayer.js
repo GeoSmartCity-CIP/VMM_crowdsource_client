@@ -17,6 +17,11 @@ mapView.addEventData = function(data){
 
 }
 
+mapView.replaceEventData = function(data) {
+    mapView.eventLayer.getSource().clear(true);
+    mapView.addEventData(data);
+}
+
 mapView.eventLayer = new ol.layer.Vector({
     source: new ol.source.Vector({}),
     style: function(feature) {
