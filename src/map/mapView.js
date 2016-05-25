@@ -6,7 +6,7 @@ mapView.init = function(){
     var map = mapView.createMap('map');
     mapView.drawLayer = new ol.layer.Vector({map: map,
                                              source: new ol.source.Vector() });
-    map.addLayer( mapView.eventLayer );
+    mapView.addEventLayer()
 };
 
 mapView.addWMSlayer = function(id, layerUrl, layers, name, visible ){
@@ -123,3 +123,4 @@ mapView.positionFromMap = function(callback){
         callback(xy[0], xy[1]);
     });
 }
+

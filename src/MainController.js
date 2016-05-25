@@ -9,16 +9,16 @@ function($scope, $http, $modal) {
   mapView.init();
 
   //tools
-  $scope.tools = [{id: "none", name: "Geen active tool", show: true},
-                  {id: "event", name: "Nieuwe melding", show: true }];
-  $scope.activeTool = app.activeTool = "none";
+  $scope.tools = [{id: "event", name: "Identificeer Meldingen", show: true},
+                  {id: "newEvent", name: "Nieuwe melding", show: true }];
+  $scope.activeTool = app.activeTool = "event";
   $scope.toolchange = function () {
-      if( $scope.activeTool === "event" ){
-        $scope.activeTool = app.activeTool = "none";
-        app.newEvent();
+      if( $scope.activeTool === "newEvent" ){
+         $scope.activeTool = app.activeTool = "event";
+         app.newEvent();
       }
       else {
-        app.activeTool = $scope.activeTool;
+         app.activeTool = $scope.activeTool;
       }
   };
   

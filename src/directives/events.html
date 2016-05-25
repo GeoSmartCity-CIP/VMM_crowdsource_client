@@ -22,7 +22,7 @@
                 <span>Prioriteit: <em>{{ event.priority }}</em></span><br/>
 
                 <img ng-src="{{mediafile}}" class="img-responsive" alt="media" ng-repeat="mediafile in event.media"
-                     ng-click="maximizeImage(event.description ,mediafile)"  />
+                     ng-click="maximizeImage(event.description ,mediafile)" onerror="imgError(this);" />
 
             </data-content>
           </tink-accordion-panel>

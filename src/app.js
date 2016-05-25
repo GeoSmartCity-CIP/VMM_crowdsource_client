@@ -7,6 +7,10 @@ var app = angular.module('myApp', [
     'tink.navigation', 'tink.tinkApi', 'tink.modal', 'tink.accordion' ]);
 
 
+//hide images with broken urls
+function imgError(image){
+    image.style.display = 'none';
+}
 
 //global helper functions
 app.getTimeStamp = function () {
