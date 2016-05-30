@@ -27,7 +27,7 @@ app.controller('createEventCtrl', ['$scope', '$modalInstance', 'xy',
                     "crs": "epsg:4326"
                 },
                 "priority": priority,
-                "datetime": app.getTimeStamp(),
+                "datetime": getTimeStamp(),
                 "status": "submitted"
             };
             var request = new FormData();
