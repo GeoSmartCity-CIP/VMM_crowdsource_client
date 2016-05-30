@@ -1,4 +1,4 @@
-Crowdsource app LNE 
+Crowdsource app VMM 
 ====
 A client application for the geosmartcity crowdwsource api (https://github.com/GeoSmartCity-CIP/crowd-sourcing).
 
