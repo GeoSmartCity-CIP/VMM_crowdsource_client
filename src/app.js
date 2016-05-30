@@ -6,14 +6,15 @@ var mapView = {};
 var app = angular.module('myApp', [ 
     'tink.navigation', 'tink.tinkApi', 'tink.modal', 'tink.accordion' ]);
 
+//global helper functions
 
 //hide images with broken urls
 function imgError(image){
     image.style.display = 'none';
 }
 
-//global helper functions
-app.getTimeStamp = function () {
+//get a timestamp in iso-notation
+function getTimeStamp() {
         var now = new Date();
         return (now.getFullYear() + "-" +
         (now.getMonth() + 1) + '-' +
