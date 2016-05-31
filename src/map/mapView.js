@@ -116,10 +116,13 @@ mapView.getMyPosition = function(callback){
 //get a single xy from mapclick
 mapView.positionFromMap = function(callback){
     $("#map").css('cursor', 'crosshair');
+    var oldTool = app.activeTool;
+    app.activeTool = "positionFromMap";
     //return the event so it can be canceled
     return mapView.map.once('click', function(evt) {
         var xy = ol.proj.transform(  evt.coordinate, 'EPSG:3857', 'EPSG:4326');
         $("#map").css('cursor', 'auto');
+        app.activeTool = oldTool;
         callback(xy[0], xy[1]);
     });
 }

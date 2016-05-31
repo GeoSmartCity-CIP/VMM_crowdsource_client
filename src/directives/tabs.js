@@ -20,6 +20,7 @@ app.controller('tabController', ['$scope', '$modal', function($scope, $modal) {
         };
       
       $scope.positionFromMap = function () {
+           app.sideNav.closeMenu()
            evt = mapView.positionFromMap( eventForm );
         };  
       
