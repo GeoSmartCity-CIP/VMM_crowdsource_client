@@ -1,5 +1,5 @@
 {
-    "title": "De Rioolnetwerk crowsource app",
+    "title": "De Rioolnetwerk crowdsource app",
     "csurl": "http://localhost:8080/CrowdSourcing",
     "layers": [{
         "name": "Rioolnetwerk" , "type": "wms", "visibile": true, 

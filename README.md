@@ -1,11 +1,14 @@
-Crowdsource app VMM 
-====
+Crowdsource application for VMM 
+===============================
 A client application for the geosmartcity crowdwsource api (https://github.com/GeoSmartCity-CIP/crowd-sourcing).
 
 The [geosmartcity frontend library](https://github.com/GeoSmartCity-CIP/gsc-client), [openlayers3](http://openlayers.org/) and the [tink-toolkit](http://tink.digipolis.be/) are used to create this application. 
 
-prerequisites
-----
+Prerequisites
+-------------
+
+This application requires the [The geosmartcity crowdsourcing backend](https://github.com/GeoSmartCity-CIP/crowd-sourcing) 
+to install this application, you can follow steps outlined below:
 
 Install tomcat (webserver) and postgis (database)
 
@@ -60,8 +63,8 @@ Configure the application:
     <Context allowCasualMultipartParsing="true" ></Context>
     ```
     
-Install this app
-----
+Build this application
+----------------------
 
 Install nodejs: https://nodejs.org , on windows use the node cmd-prompt for the next actions:
 
@@ -80,4 +83,34 @@ Then build the application using grunt:
 The folder */build* will be created and contain a .war-file to deploy to the tomcat webserver.
 The folder */public* will contain the application in unpackaged form. 
 
+Configure this application
+--------------------------
 
+Before you can use the application you need to specify some configuration parameters.
+All parameters are required.
+
+- title: A name for teh application, free to choose.
+- csurl: The **full path** to the Crowdsource backend, do not use a relative path here.
+- layers: An array of objectjs containing WMS-layers for this project.
+    - name: The name of the WMS-layer in the legend.
+    - url: The url of the WMS, do not include the part afhter the *"?"*.
+    - wmslayers: An array of the names and id's of the internal layers of the WMS you want to include in the application.
+    
+**Example:**
+  ```json
+  {
+    "title": "De Rioolnetwerk crowdsource app",
+    "csurl": "http://localhost:8080/CrowdSourcing",
+    "layers": [{
+        "name": "Rioolnetwerk" , "type": "wms", "visibile": true, 
+        "url": "//geoservices.informatievlaanderen.be/raadpleegdiensten/VMM/wms",
+        "wmslayers": [{"name":"Hydropunt",  "id":"HYDPNT"}, 
+                      {"name":"Streng",     "id":"STRENG"}, 
+                      {"name":"Koppelpunt", "id":"KOPPNT"}]
+      } , {
+        "name": "mercatorNet", "type":"wms", "visibile": false, 
+        "url": "//www.mercator.vlaanderen.be/raadpleegdienstenmercatorpubliek/ows",
+        "wmslayers": [{"name": "Habitat gebied", "id":"ps:ps_hbtrl"}]
+      }]
+  }
+  ```

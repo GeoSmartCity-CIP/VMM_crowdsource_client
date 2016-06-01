@@ -1,9 +1,9 @@
 {
   "name": "VMM_crowdsource_client",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "author": "Kay Warrie",
   "description": "A client application for the geosmartcity crowdwsource api",
-  "homepage": "https://github.com/warrieka/VMM_crowdsource_client",
+  "homepage": "http://www.geosmartcity.eu/",
   "repository": {
     "type": "git",
     "url": "https://github.com/warrieka/VMM_crowdsource_client"
