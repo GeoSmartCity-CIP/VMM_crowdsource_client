@@ -65,6 +65,7 @@ Configure the application:
     
 Build this application
 ----------------------
+If you need to install this app on a java-application server like tomcat, you can download the [war-file](https://github.com/warrieka/VMM_crowdsource_client/releases/download/1.0/VMM_crowdsource_client.war) instead. 
 
 Install nodejs: https://nodejs.org , on windows use the node cmd-prompt for the next actions:
 
@@ -89,11 +90,11 @@ Configure this application
 Before you can use the application you need to specify some configuration parameters.
 All parameters are required.
 
-- title: A name for teh application, free to choose.
+- title: A name for the application, free to choose.
 - csurl: The **full path** to the Crowdsource backend, do not use a relative path here.
 - layers: An array of objectjs containing WMS-layers for this project.
     - name: The name of the WMS-layer in the legend.
-    - url: The url of the WMS, do not include the part afhter the *"?"*.
+    - url: The url of the WMS, do not include the part after the *"?"*. 
     - wmslayers: An array of the names and id's of the internal layers of the WMS you want to include in the application.
     
 **Example:**
